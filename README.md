@@ -4,10 +4,10 @@ Ref:
 - https://developers.facebook.com/docs/marketing-apis/
 - https://developers.facebook.com/docs/graph-api/overview
 
-Chapter 2: More about OAuth
+Chapter 2: Access Tokens
 Ref:
 
-Chapter 3: More about Graph API:
+Chapter 3: Creating your App
 Ref:
 
 - https://developers.facebook.com/docs/graph-api
