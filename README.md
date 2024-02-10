@@ -6,3 +6,7 @@ Easy to understand and access marketing metrics for gym clients from Gym Member 
 
 - Facebook Ads Data
 - HighLevel Data
+
+## Required Software
+
+## Instalation Instructions

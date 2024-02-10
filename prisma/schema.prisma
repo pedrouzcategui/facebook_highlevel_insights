@@ -22,6 +22,11 @@ enum AppointmentType {
   IN_PERSON
 }
 
+enum LeadType {
+  ADULT
+  ATHLETE
+}
+
 enum LeadStatus {
   WON
   OPEN
@@ -45,6 +50,7 @@ enum Role {
 model Client {
   id        String     @id @unique @default(uuid())
   name      String
+  isWebsite Boolean
   locations Location[]
 }
 
@@ -91,6 +97,7 @@ model Lead {
   phone        String
   source       LeadSource
   status       LeadStatus
+  type         LeadType
   value        Float?
   location     Location       @relation(fields: [locationId], references: [id])
   locationId   String
