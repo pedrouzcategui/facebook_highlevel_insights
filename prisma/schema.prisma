@@ -1,0 +1,154 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum LeadSource {
+  FACEBOOK_ADS
+  GOOGLE_ADS
+  WEBSITE
+  OTHER
+}
+
+enum AppointmentType {
+  PHONE
+  IN_PERSON
+}
+
+enum LeadStatus {
+  WON
+  OPEN
+  LOST
+  ABANDONED
+}
+
+enum AppointmentStatus {
+  CONFIRMED
+  CANCELLED
+  SHOWED
+  NO_SHOWED
+}
+
+enum Role {
+  ADMIN
+  AGENCY
+  ACCOUNT
+}
+
+model Client {
+  id        String     @id @unique @default(uuid())
+  name      String
+  locations Location[]
+}
+
+model Timezone {
+  id       String     @id
+  name     String
+  Location Location[]
+}
+
+model Country {
+  id       String     @id
+  name     String
+  Location Location[]
+}
+
+model Location {
+  id                     String               @id @unique @default(uuid())
+  api_key                String
+  address                String
+  city                   String
+  state                  String
+  postal_code            String
+  advertising_budget     Float
+  kpi                    Float
+  leads                  Lead[]
+  Appointments           Appointments[]
+  facebook_metrics       Facebook_Metrics[]
+  Client                 Client?              @relation(fields: [clientId], references: [id])
+  clientId               String?
+  timezone               Timezone             @relation(fields: [timezoneId], references: [id])
+  timezoneId             String
+  facebook_information   Facebook_Information @relation(fields: [facebook_InformationId], references: [id])
+  facebook_InformationId String
+  User                   User?                @relation(fields: [userId], references: [id])
+  userId                 String?
+  Country                Country?             @relation(fields: [countryId], references: [id])
+  countryId              String?
+}
+
+model Lead {
+  id           String         @id @unique @default(uuid())
+  fullName     String
+  email        String
+  phone        String
+  source       LeadSource
+  status       LeadStatus
+  value        Float?
+  location     Location       @relation(fields: [locationId], references: [id])
+  locationId   String
+  Appointments Appointments[]
+}
+
+model Appointments {
+  id                String            @id @unique @default(uuid())
+  creation_datetime DateTime
+  start_datetime    DateTime
+  location          Location          @relation(fields: [locationId], references: [id])
+  locationId        String
+  lead              Lead?             @relation(fields: [leadId], references: [id])
+  leadId            String
+  status            AppointmentStatus
+  type              AppointmentType
+}
+
+model Facebook_Information {
+  id                     String              @id
+  facebook_page          Facebook_Page       @relation(fields: [facebook_page_id], references: [id])
+  facebook_page_id       String
+  facebook_ad_account    Facebook_Ad_Account @relation(fields: [facebook_ad_account_id], references: [id])
+  facebook_ad_account_id String
+  locations              Location[]
+}
+
+model Facebook_Page {
+  id                   String                 @id
+  name                 String
+  Facebook_Information Facebook_Information[]
+}
+
+model Facebook_Ad_Account {
+  id                   String                 @id
+  name                 String
+  Facebook_Information Facebook_Information[]
+}
+
+model Facebook_Metrics {
+  id                 String   @id
+  spend              Float
+  impressions        Int
+  clicks             Int
+  cost_per_lead      Int
+  click_through_rate Int
+  date               DateTime
+  location           Location @relation(fields: [locationId], references: [id])
+  locationId         String
+}
+
+model User {
+  id           String     @id @default(uuid())
+  first_name   String
+  last_name    String
+  email        String     @unique
+  phone_number String     @unique
+  password     String
+  location     Location[]
+  role         Role
+}
