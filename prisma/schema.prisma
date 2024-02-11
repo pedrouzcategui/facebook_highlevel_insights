@@ -22,6 +22,12 @@ enum AppointmentType {
   IN_PERSON
 }
 
+enum BusinessPlan {
+  DYFN
+  DFY
+  WEBSITE_AND_SAAS
+}
+
 enum LeadType {
   ADULT
   ATHLETE
@@ -75,6 +81,7 @@ model Location {
   state                  String
   postal_code            String
   advertising_budget     Float
+  subscription_amount    Float?               @default(0.00)
   kpi                    Float
   leads                  Lead[]
   Appointments           Appointments[]

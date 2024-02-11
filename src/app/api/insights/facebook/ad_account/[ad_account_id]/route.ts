@@ -1,5 +1,10 @@
+import { NextResponse } from "next/server";
+import { getAdAccountInsights } from "@/actions/facebook";
+
 export async function GET(request: Request) {
-  const AD_ACCOUNT_ID = getAdAccountId(request.url);
+  const ad_account_id = getAdAccountId(request.url);
+  const insights = await getAdAccountInsights(ad_account_id);
+  return NextResponse.json({ insights });
 }
 
 function getAdAccountId(url: string) {

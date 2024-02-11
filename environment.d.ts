@@ -3,6 +3,7 @@ declare global {
     interface ProcessEnv {
       FACEBOOK_APP_CLIENT_ID: string;
       FACEBOOK_APP_CLIENT_SECRET: string;
+      LONG_LIVED_FACEBOOK_ACCESS_TOKEN: string;
       NODE_ENV: "development" | "production";
       PORT?: string;
       PWD: string;

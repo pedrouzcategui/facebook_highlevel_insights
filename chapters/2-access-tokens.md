@@ -22,6 +22,8 @@ Pretty much all Meta apps need an access token.
 
 ## Auth Flow
 
+The easiest way to get access programatically to things is via the user token and changing that for a long lived access token.
+
 ### User Access Token:
 
 - Client (App) request access and permissions via SDK and Login Dialog.
