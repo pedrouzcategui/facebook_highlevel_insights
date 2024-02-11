@@ -42,9 +42,10 @@ enum AppointmentStatus {
 }
 
 enum Role {
-  ADMIN
-  AGENCY
-  ACCOUNT
+  ADMIN_DEV
+  AGENCY_USER
+  CLIENT_ACCOUNT
+  CALL_CENTER_AGENT
 }
 
 model Client {

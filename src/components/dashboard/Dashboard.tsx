@@ -1,6 +1,8 @@
+import { generateAccessToken } from "@/actions/facebook/get-access-token";
 import MetricsTable from "./MetricsTable";
+export default async function Dashboard() {
 
-export default function Dashboard() {
+    const data = await generateAccessToken();
     return (
         <div>
             <h2>Hello User Name</h2>
