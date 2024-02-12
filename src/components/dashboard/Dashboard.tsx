@@ -1,5 +1,5 @@
 import { generateAccessToken } from "@/actions/facebook/get-access-token";
-import MetricsTable from "./MetricsTable";
+import { MetricsTable } from "./MetricsTable";
 export default async function Dashboard() {
 
     const data = await generateAccessToken();

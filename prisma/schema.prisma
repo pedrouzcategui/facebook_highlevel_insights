@@ -80,6 +80,7 @@ model Location {
   city                   String
   state                  String
   postal_code            String
+  name                   String
   advertising_budget     Float
   subscription_amount    Float?               @default(0.00)
   kpi                    Float
@@ -155,6 +156,12 @@ model Facebook_Metrics {
   date               DateTime
   location           Location @relation(fields: [locationId], references: [id])
   locationId         String
+}
+
+model Facebook_Access_Token {
+  id           Int      @id @default(1)
+  access_token String
+  expires_on   DateTime
 }
 
 model User {
